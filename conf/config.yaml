@@ -1,0 +1,20 @@
+Database:
+  DBType: mysql
+  UserName: root
+  Password: example
+  Host: 127.0.0.1:3306
+  DBName: gin
+  Charset: utf8
+  ParseTime: True
+  MaxIdleConns: 10
+  MaxOpenConns: 30
+
+Sys:
+  RunMode: debug
+  HttpPort: 9000
+  ReadTimeout: 60
+  WriteTimeout: 60
+
+#注意配置文件尽量不用[-,_]连接
+jwt:
+  signkey: qwertyuiopasdfghjkl

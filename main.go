@@ -2,14 +2,14 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"net/http"
+	_ "myself_rep/gin_vue/core"
+	"myself_rep/gin_vue/global"
 )
+
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK,gin.H{"msg":"pong"})
-	})
+
 	r = RouterList(r)
-	r.Run(":9000")
+	r.Run(":"+global.GVA_CONFIG.Sys.HttpPort)
 }
