@@ -15,7 +15,13 @@ func LoginHandle(c *gin.Context){
 	//验证传入字符串是否合法(是否为空，格式前端验证)
 	//前端确定传入参数非空、符合6-12位、符合字符串与数字符号的两种组合
 	name := j["name"]
+	if name == "" {
+		name = c.PostForm("name")
+	}
 	password := j["password"]
+	if password == "" {
+		password = c.PostForm("password")
+	}
 	if name == "" || password =="" {
 		c.JSON(http.StatusOK,gin.H{"msg":"用户名或密码不能为空！","code":global.LOGINNULL})
 		return
@@ -35,7 +41,7 @@ func LoginHandle(c *gin.Context){
 			if err!= nil {
 				fmt.Printf("ReleaseToken faild %s\n",err)
 			}
-			c.JSON(http.StatusOK,gin.H{"msg":"登陆成功","code":global.SUCCESS,"token":token})
+			c.JSON(http.StatusOK,gin.H{"msg":"登陆成功","code":global.SUCCESS,"data":token})
 		}
 	}
 }

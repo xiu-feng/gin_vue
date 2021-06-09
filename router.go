@@ -22,10 +22,16 @@ func RouterList(r *gin.Engine) *gin.Engine{
 	api := r.Group("/api")
 	api.POST("/login",controller.LoginHandle)
 	//带jwt验证的路由
-	authapi := api.Group("/", middle.AuthMiddleware())
-	authapi.GET("/", func(c *gin.Context) {
+	authApi := api.Group("/", middle.AuthMiddleware())
+	authApi.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK,gin.H{"msg":"首页"})
 	})
+	//用户路由
+	authApi.GET("/user",controller.GetUser)
+	authApi.POST("/user",controller.AddUser)
+	authApi.GET("/user/:id",controller.FindOne)
+	authApi.PUT("/user/:id",controller.UpdateUser)
+	authApi.DELETE("/user/:id",controller.DeleteUser)
 
 	return r
 }
